@@ -1,0 +1,174 @@
+.navbar{
+    height: 5rem;
+    background-color: white;
+}
+body{
+    display: flex;
+    flex-direction: column;
+    min-height:100vh;
+}
+.container{
+    display: flex;
+    flex: 1;
+    padding-top: 1.2rem;
+}
+.fa-compass{
+    color: #fe424d;
+    font-size: 2rem;
+}
+.nav-link{
+    color: #222222 !important;
+}
+.f-info-links a{
+    color:#222222;
+    text-decoration: none;
+}
+.f-info-links a:hover{
+    text-decoration: underline;
+}
+.f-info{
+    text-align: center;
+    height: 8rem;
+    display: flex;
+    background-color: lightgrey;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: space-evenly;
+}
+.f-info-links{
+    width: 100%;
+}
+.f-info-socials{
+    width: 100%;
+    font-size: 1.2rem;
+}
+.f-info-socials i{
+    margin-right: 1rem;
+}
+.fa-indian-rupee-sign{
+    color: #222222;
+}
+.listing-card{
+    border:none !important;
+    margin-bottom: 2rem;
+}
+.card-img-top{
+    border-radius:1rem !important;
+    width: 100%  !important;
+    object-fit: cover !important;
+}
+.card-body{
+    padding: 1rem !important;
+}
+.card-container{ 
+    padding-top: 5rem !important;
+    padding-left: 2rem !important;
+    font-size: large;
+}
+.button-container{
+    padding-top: 2rem;
+}
+.listing-link{
+    text-decoration: none;
+}
+.review-container{
+    width: 35rem;
+}
+.card-img-overlay{
+    opacity: 0;
+}
+.card-img-overlay:hover{
+    opacity: 0.2;
+    background-color: white;
+}
+.btn{
+    width: 5.78rem;
+    margin-bottom: 2rem;
+}
+.btn:hover{
+    background-color: white !important;
+    color: black !important;
+}
+.buttons{
+    display: flex;
+}
+.dlt-btn{
+    margin-left: 0.5rem;
+}
+/* .search-btn{
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    width: 29rem;
+} */
+.search-class{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-left: 10rem;
+    border-radius: 2rem;
+}
+.search-class:hover{
+    border-color: blue;
+}
+.search-form{
+    margin-right: 8rem;
+    padding-top: 2rem;
+}
+#searchbar{
+    height: 3rem;
+    width: 25rem;
+    /* margin-left: 2rem !important; */
+}
+.srch-btn:hover{
+    color: blue !important;
+}
+.search-container{
+    display: flex;
+    align-items: baseline;
+    align-content: space-between;
+}
+.review-main-container{
+    display: flex;
+    flex-direction: row;
+    border:solid 2px #fe424d;
+    border-radius: 3px;
+}
+.navbar{
+    border: solid 2px #fe424d;
+}
+.main-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.review-profile-container{
+    margin-top: 4rem;
+}
+.review-individual-container{
+    border: solid 1px grey;
+    border-radius: 0.5rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
+}
+.rating-warning-container{
+    background-color: #fe424d;
+    color: white;
+    padding: 4rem;
+    border-radius: 0.25rem;
+    box-shadow: black;
+}
+.login-container{
+    padding: 2rem;
+}
+.signup-container{
+    padding: 2rem;
+}
+.star-container{
+    padding: 2rem;
+    width: 40rem;
+    background-color: rgb(190, 253, 252);
+    border-radius: 0.75rem;
+}
+.srch-btn:hover{
+    color:blue !important;
+    background-color: none !important;
+}

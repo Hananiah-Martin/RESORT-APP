@@ -1,0 +1,48 @@
+<% layout("/layouts/boilerplate2")%>
+<body>
+    <div class="col-8 offset-2">
+        <h2>Create New Listing</h2>
+        <form action="/listing" method="post" novalidate class="needs-validation" enctype="multipart/form-data">
+        <div>
+            <label for="title" class="form-label">Title</label>
+            <input type="text"  class="form-control" name="listing[title]" placeholder="Enter title" id="title" required>
+            <div class="invalid-feedback">Please enter the title</div>
+        </div>
+        <div>
+            <label for="description" class="form-label">Description</label>
+            <textarea class="form-control" name="listing[description]" id="" cols="30" rows="10" placeholder="Description" required></textarea>
+            <div class="invalid-feedback">Please enter some descript ion</div>
+        </div>
+            <div>
+                <label for="image" class="form-label">Upload listing Image</label>
+                <input type="file" placeholder="Enter link" name="listing[image]" class="form-control" required>
+            </div>
+            <div class="row">
+                <div class="col-4">
+                    <label for="price" class="form-label">Price</label>
+                    <input type="text" placeholder="Price" name="listing[price]" class="form-control" required>
+                    <div class="invalid-feedback">Please enter price</div>
+                </div>
+                <div class="col-8">
+                    <label for="country" class="form-label">Country</label>
+                    <input type="text" placeholder="country" name="listing[country]" class="form-control" required>
+                    <div class="invalid-feedback">Please enter country</div>
+                </div>
+            </div>
+            <div>
+                <label for="location" class="form-label">Location</label>
+                <input type="text" placeholder="location" name="listing[location]" class="form-control" required>
+                <div class="invalid-feedback">Please enter location</div>
+                <br>
+            </div>
+            <div>
+                <label for="landmark" class="form-label">Land Mark</label>
+                <input type="text" value="" placeholder="beach,mountain,hill" class="form-control" name="landmark" required>
+                <div class="invalid-feedback">Enter valid landmark</div>
+                <br><br>
+            </div>
+            <button class="btn btn-primary btn-md">Add</button>
+        </form>
+    </div>
+</body>
+</html>

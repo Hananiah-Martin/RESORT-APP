@@ -1,0 +1,46 @@
+<% layout("/layouts/boilerplate2")%>
+<body>
+    <div class="col-8 offset-2">
+        <h2>Edit Listing</h2>
+        <form action="/listing/<%=listing.id%>?_method=PUT" method="post" novalidate class="needs-validation" enctype="multipart/form-data">
+            <div>
+                <label for="" class="form-label">Title</label>
+                <input type="text" name="title" value="<%=listing.title%>" class="form-control" required>
+                <div class="invalid-feedback">Enter valid title</div>
+            </div>
+            <div>
+                <label for="" class="form-label">Description</label>
+                <textarea name="description" id="" cols="30" rows="10" class="form-control" required><%=listing.description%></textarea>
+                <div class="invalid-feedback">Enter some description</div>
+            </div>
+            <div>
+                <label for="" class="form-label">Upload new Image</label>
+                <input type="file" placeholder="Enter link" name="image" class="form-control" ><br><br>
+            </div>
+            <div>
+                <label for="" class="form-label">Price</label>
+                <input type="text" value="<%=listing.price%>" class="form-control" name="price" required>
+                <div class="invalid-feedback">Enter valid price</div>
+            </div>
+            <div>
+                <label for="" class="form-label">Location</label>
+                <input type="text" value="<%=listing.location%>" class="form-control" name="location" required>
+                <div class="invalid-feedback">Enter valid location</div>
+            </div>
+            <div>
+                <label for="country" class="form-label">Country</label>
+                <input type="text" value="<%=listing.country%>"  class="form-control" name="country" required>
+                <div class="invalid-feedback">Enter valid country</div>
+                <br>
+            </div>
+            <div>
+                <label for="landmark" class="form-label">Land Mark</label>
+                <input type="text" value="mountain"  class="form-control" name="landmark" required>
+                <div class="invalid-feedback">Enter valid landmark</div>
+                <br><br>
+            </div>
+            <button class="btn btn-success">Edit</button>
+        </form>
+    </div>
+   
+</body>

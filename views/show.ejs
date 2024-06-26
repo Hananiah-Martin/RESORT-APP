@@ -1,0 +1,45 @@
+<% layout("/layouts/boilerplate2")%>
+<body>
+   <div class="container">
+     <div class="card offset-1 listing-card" style="width: 25rem;">
+        <h3><%=listing.title %></h3>
+        <img src="<%=listing.image.url%>" class="card-img-top" alt="...">
+        <br>
+        <br><br>
+        </div>
+    </div>
+    <div class="card-body card-container">
+      <p class="card-text"><b>Owned by : </b><%=listing.owner.username%></p>
+      <p class="card-text"><b>Description : </b><%=listing.description %></p>
+      <p class="card-text"><b>Price : </b><i class="fa-solid fa-indian-rupee-sign"></i><%=listing.price.toLocaleString("en-in")%></p>
+      <p class="card-text"><b>Location : </b><%=listing.location %></p>
+      <p class="card-text"><b>Country : </b> <%=listing.country %></p>
+      <p class="card-text"><b>Rating : </b>
+        <%if(average>0){%>
+          <% for (let i = 0; i <average; i++) { %>
+            <i class="fa-solid fa-star" style="color: #FFD43B;"></i>
+          <% } %>
+        <%}%>
+      </p>
+      <%if(listing.reviews.length==0){%>
+        <span>No reviews yet</span>
+      <%}%>
+      <div class="button-container">
+        <%if(currUser&&listing.owner._id.equals(currUser._id)){%>
+          <div class="buttons">
+            <a href="/listing/<%=listing.id%>/edit" class="btn btn-primary">Edit</a>
+            <form action="/listing/<%=listing.id%>?_method=delete" method="post">
+                <button class="btn btn-danger dlt-btn">Delete</button>
+            </form>
+        <%}%>
+      </div>
+      <div class="rate-button-container">
+        <form action="/listing/<%=listing.id%>/rating" method="get">
+          <button class="btn btn-outline-success">Rate Us</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
+

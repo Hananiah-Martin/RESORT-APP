@@ -1,0 +1,19 @@
+<% layout("/layouts/boilerplate2")%>
+<div class="row offset-2 row-cols-lg-3 row row-cols-md-2 row row-cols-sm-1 review-profile-container" style="width: 50rem;">
+    <%for(review of listing.reviews){%>
+        <div class="review-individual-container">
+            <p class="card-title" style="padding-top: 1rem;font-size:1.75rem;"><%=review.author.username.slice(0,1).toUpperCase()+review.author.username.substring(1)%></p>
+            <p class="card-text" style="padding-top: 0.4rem;"><%=review.comment.charAt(0).toUpperCase()+review.comment.substring(1)%></p>
+            <!-- <p class="starability-result card-text"data-rating="<%=review.rating%>">
+            </p> -->
+            <p class="card-text"><b>Rating :</b>
+                  <% for (let i = 0; i <review.rating; i++) { %>
+                    <i class="fa-solid fa-star" style="color: #FFD43B;"></i>
+                  <% } %>
+              </p>
+            <form method="POST" action="/listing/<%=listing.id%>/reviews/<%=review.id%>?_method=delete">
+            <button class="btn btn-sm btn-danger" style="margin-top: 1rem;">Delete</button>
+            </form>
+        </div>
+    <%}%>
+</div> 
