@@ -1,48 +1,47 @@
 <% layout("/layouts/boilerplate2")%>
 <body>
-    <div class="col-8 offset-2">
-        <h2>Create New Listing</h2>
-        <form action="/listing" method="post" novalidate class="needs-validation" enctype="multipart/form-data">
-        <div>
-            <label for="title" class="form-label">Title</label>
-            <input type="text"  class="form-control" name="listing[title]" placeholder="Enter title" id="title" required>
-            <div class="invalid-feedback">Please enter the title</div>
+   
+<div class="flex items-center justify-center border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 " style="margin: auto; margin-top: 6rem; padding: 4rem;">
+    <form action="/listing" method="post"  enctype="multipart/form-data">
+        <div class="grid gap-6 mb-6 md:grid-cols-1">
+            <div>
+                <label for="title" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Title</label>
+                <input type="text" id="title" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Title" name="listing[title]" required />
+            </div>
+            <div>
+                <label for="description" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your message</label>
+                <textarea id="description" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Describe about the place " name="listing[description]"></textarea>
+            </div>
+            <div>
+                <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="image">Upload image</label>
+                <input class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" id="image" name="listing[image]" type="file">
+            </div>
+            <div>
+                <label for="price" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Price</label>
+                <input type="number" id="price" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Price" name="listing[price]" required />
+            </div>
+            <div>
+                <label for="country" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Country</label>
+                <input type="text" id="country" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Country" name="listing[country]" required />
+            </div>
+            <div>
+                <label for="location" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Location</label>
+                <input type="text" id="location" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="location" name="listing[location]" required />
+            </div>
+            <div>
+                <label for="landmark" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Landmark</label>
+                <input type="text" id="landmark" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Hill,Mountain,Beach" name="listing[landmark]" required />
+            </div>
         </div>
-        <div>
-            <label for="description" class="form-label">Description</label>
-            <textarea class="form-control" name="listing[description]" id="" cols="30" rows="10" placeholder="Description" required></textarea>
-            <div class="invalid-feedback">Please enter some descript ion</div>
+        <div class="flex items-start mb-6">
+            <div class="flex items-center h-5">
+            <input id="remember" type="checkbox" value="" class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-600 dark:ring-offset-gray-800" required />
+            </div>
+            <label for="remember" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">I agree with the <a href="#" class="text-blue-600 hover:underline dark:text-blue-500">terms and conditions</a>.</label>
         </div>
-            <div>
-                <label for="image" class="form-label">Upload listing Image</label>
-                <input type="file" placeholder="Enter link" name="listing[image]" class="form-control" required>
-            </div>
-            <div class="row">
-                <div class="col-4">
-                    <label for="price" class="form-label">Price</label>
-                    <input type="text" placeholder="Price" name="listing[price]" class="form-control" required>
-                    <div class="invalid-feedback">Please enter price</div>
-                </div>
-                <div class="col-8">
-                    <label for="country" class="form-label">Country</label>
-                    <input type="text" placeholder="country" name="listing[country]" class="form-control" required>
-                    <div class="invalid-feedback">Please enter country</div>
-                </div>
-            </div>
-            <div>
-                <label for="location" class="form-label">Location</label>
-                <input type="text" placeholder="location" name="listing[location]" class="form-control" required>
-                <div class="invalid-feedback">Please enter location</div>
-                <br>
-            </div>
-            <div>
-                <label for="landmark" class="form-label">Land Mark</label>
-                <input type="text" value="" placeholder="beach,mountain,hill" class="form-control" name="listing[landmark]" required>
-                <div class="invalid-feedback">Enter valid landmark</div>
-                <br><br>
-            </div>
-            <button class="btn btn-primary btn-md">Add</button>
-        </form>
-    </div>
+        <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit</button>
+    </form>
+    
+</div>
 </body>
 </html>

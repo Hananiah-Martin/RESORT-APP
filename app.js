@@ -56,13 +56,15 @@ app.use(passport.session());
 passport.use(new localStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
+
 main().then(()=>{
     console.log("connected to database successfully");
 }).
 catch(err => console.log(err));
 async function main() {
-  await mongoose.connect('mongodb+srv://hananiahhoney5:55VikeotfqDYmKT2@cluster0.5h25d9m.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0');
+    await mongoose.connect('mongodb+srv://hananiahhoney5:55VikeotfqDYmKT2@cluster0.5h25d9m.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0');
 }
+
 app.use((req,res,next)=>{
     res.locals.success=req.flash("success");
     res.locals.error=req.flash("error");
@@ -73,6 +75,7 @@ app.use((req,res,next)=>{
 app.post("/landmark",async (req,res)=>{
     let {search}=req.body;
     let allListings=await Listing.find({landmark:search});
+    console.log(allListings.length);
     if(allListings!=null){
         res.render("landmark.ejs",{allListings});
     }

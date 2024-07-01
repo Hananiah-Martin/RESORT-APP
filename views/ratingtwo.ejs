@@ -1,40 +1,35 @@
 <% layout("/layouts/boilerplate2")%>
-<div class="main-container offset-1" style="width: 75rem;">
-    <%if(currUser){%>
-        <form action="/listing/<%=listing.id%>/reviews" method="POST" novalidate class="needs-validation">
-          <div class="star-container">
-            <label for="review" class="form-label"><b>Rating</b></label>
-            <fieldset class="starability-slot">
-              <input type="radio" id="no-rate" class="input-no-rate" name="review[rating]" value="1" checked aria-label="No rating." />
-              <input type="radio" id="first-rate1" name="review[rating]" value="1" />
-              <label for="first-rate1" title="Terrible">1 star</label>
-              <input type="radio" id="first-rate2" name="review[rating]" value="2" />
-              <label for="first-rate2" title="Not good">2 stars</label>
-              <input type="radio" id="first-rate3" name="review[rating]" value="3" />
-              <label for="first-rate3" title="Average">3 stars</label>
-              <input type="radio" id="first-rate4" name="review[rating]" value="4" />
-              <label for="first-rate4" title="Very good">4 stars</label>
-              <input type="radio" id="first-rate5" name="review[rating]" value="5" />
-              <label for="first-rate5" title="Amazing">5 stars</label>
-            </fieldset>
-          <label for="comment" class="form-label"><b>Comment</b></label>
-          <textarea name="review[comment]" class="form-control"required id="comment" cols="30" rows="10"></textarea>
-          <div class="invalid-feedback">Please add some comments for review</div>
-          <br>
-          <button class="btn btn-outline-dark">Submit</button>
-        </form>
-          <form action="/listing/<%=listing.id%>/allReviews" method="get">
-            <button class="btn btn-outline-dark">Show All reviews</button>
-          </form>
-        </div>
-    <%}%>
-    <hr>
-    <%if(currUser==null){%>
-      <div style="margin-right: 10rem;" class="rating-warning-container">
-        <h3>Kindly Login to continue</h3>
-        <form action="/login" method="get">
-          <button class="btn btn-success btn-md mt-3 warning-login">Login</button>
-        </form>
-      </div>
-    <%}%>
+<div class="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700" style="margin: auto; width: 20rem;">
+  <%if(currUser){%>
+  <a href="#">
+      <h3 class="mb-2 text-2xl font-semibold tracking-tight text-gray-900 dark:text-white">Feed-back</h3>
+  </a>
+  <form action="/listing/<%=listing.id%>/reviews" method="POST" novalidate>
+    <label for="review" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Rating</label>
+      <fieldset class="starability-slot">
+        <input type="radio" id="no-rate" class="input-no-rate" name="review[rating]" value="1" checked aria-label="No rating." />
+        <input type="radio" id="first-rate1" name="review[rating]" value="1" />
+        <label for="first-rate1" title="Terrible">1 star</label>
+        <input type="radio" id="first-rate2" name="review[rating]" value="2" />
+        <label for="first-rate2" title="Not good">2 stars</label>
+        <input type="radio" id="first-rate3" name="review[rating]" value="3" />
+        <label for="first-rate3" title="Average">3 stars</label>
+        <input type="radio" id="first-rate4" name="review[rating]" value="4" />
+        <label for="first-rate4" title="Very good">4 stars</label>
+        <input type="radio" id="first-rate5" name="review[rating]" value="5" />
+        <label for="first-rate5" title="Amazing">5 stars</label>
+      </fieldset>
+      <label for="comment" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your message</label>
+      <textarea id="message" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Write your thoughts here..." name="review[comment]"></textarea>
+    <br>
+    <button type="submit" class="py-2.5 px-5 me-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">Submit</button>
+  </form>
+  <a href="/listing/<%=listing.id%>/allReviews" class="inline-flex font-medium items-center text-blue-600 hover:underline">
+     Show all reviews
+      <svg class="w-3 h-3 ms-2.5 rtl:rotate-[270deg]" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
+          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11v4.833A1.166 1.166 0 0 1 13.833 17H2.167A1.167 1.167 0 0 1 1 15.833V4.167A1.166 1.166 0 0 1 2.167 3h4.618m4.447-2H17v5.768M9.111 8.889l7.778-7.778"/>
+      </svg>
+  </a>
+  <%}%>
 </div>
+

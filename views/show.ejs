@@ -1,45 +1,37 @@
 <% layout("/layouts/boilerplate2")%>
 <body>
-   <div class="container">
-     <div class="card offset-1 listing-card" style="width: 25rem;">
-        <h3><%=listing.title %></h3>
-        <img src="<%=listing.image.url%>" class="card-img-top" alt="...">
-        <br>
-        <br><br>
-        </div>
-    </div>
-    <div class="card-body card-container">
-      <p class="card-text"><b>Owned by : </b><%=listing.owner.username%></p>
-      <p class="card-text"><b>Description : </b><%=listing.description %></p>
-      <p class="card-text"><b>Price : </b><i class="fa-solid fa-indian-rupee-sign"></i><%=listing.price.toLocaleString("en-in")%></p>
-      <p class="card-text"><b>Location : </b><%=listing.location %></p>
-      <p class="card-text"><b>Country : </b> <%=listing.country %></p>
-      <p class="card-text"><b>Rating : </b>
-        <%if(average>0){%>
-          <% for (let i = 0; i <average; i++) { %>
-            <i class="fa-solid fa-star" style="color: #FFD43B;"></i>
-          <% } %>
-        <%}%>
-      </p>
-      <%if(listing.reviews.length==0){%>
-        <span>No reviews yet</span>
-      <%}%>
-      <div class="button-container">
-        <%if(currUser&&listing.owner._id.equals(currUser._id)){%>
-          <div class="buttons">
-            <a href="/listing/<%=listing.id%>/edit" class="btn btn-primary">Edit</a>
-            <form action="/listing/<%=listing.id%>?_method=delete" method="post">
-                <button class="btn btn-danger dlt-btn">Delete</button>
-            </form>
-        <%}%>
-      </div>
-      <div class="rate-button-container">
-        <form action="/listing/<%=listing.id%>/rating" method="get">
-          <button class="btn btn-outline-success">Rate Us</button>
-        </form>
+    <div style="margin: auto;margin-top:5rem;">
+      <img class="object-cover w-full rounded-t-lg h-30 md:h-auto md:w-52 md:rounded-none md:rounded-s-lg" src="<%=listing.image.url%>" alt="" style="height: 30rem; width:25rem">
+      <div class="flex flex-col  p-4 leading-normal">
+          <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white"><%=listing.title %></h5>
+          <p class="mb-3 font-normal text-gray-700 dark:text-gray-400"><%=listing.description %></p>
+          <p class="mb-3 font-normal text-gray-700 dark:text-gray-400"><b>Price : </b><i class="fa-solid fa-indian-rupee-sign"></i><%=listing.price.toLocaleString("en-in")%></p>
+          <p class="mb-3 font-normal text-gray-700 dark:text-gray-400"><b>Location : </b><%=listing.location %></p>
+          <p class="mb-3 font-normal text-gray-700 dark:text-gray-400"><b>Country : </b> <%=listing.country %></p>
+          <p class="mb-3 font-normal text-gray-700 dark:text-gray-400"><b>Rating : </b>
+            <%if(average>0){%>
+              <% for (let i = 0; i <average; i++) { %>
+                <i class="fa-solid fa-star" style="color: #FFD43B;"></i>
+              <% } %>
+            <%}%></p>
+            <%if(listing.reviews.length==0){%>
+              <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">No reviews yet</p>
+            <%}%>
+            <div style="display: flex;">
+              <%if(currUser&&listing.owner._id.equals(currUser._id)){%>
+                <a href="/listing/<%=listing.id%>/edit" class="text-gray-900 bg-gradient-to-r from-red-200 via-red-300 to-yellow-200 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-red-100 dark:focus:ring-red-400 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2" style="width: 5rem;">Edit</a>
+                <form action="/listing/<%=listing.id%>?_method=delete" method="post">
+                  <button class="text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"" style="width: 5rem;">Delete</button>
+                </form>
+            <%}%>
+            </div>
+            <%if(currUser){%>
+              <form action="/listing/<%=listing.id%>/rating" method="get">
+                <button class="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 shadow-lg shadow-blue-500/50 dark:shadow-lg dark:shadow-blue-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 ">Rate Us</button>
+              </form>
+            <%}%>
       </div>
     </div>
-  </div>
 </body>
 </html>
 

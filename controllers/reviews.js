@@ -7,11 +7,11 @@ module.exports.createReview=async(req,res)=>{
     listing.reviews.push(newReview);
     await newReview.save();
     await listing.save();
-    res.redirect(`/listing/${listing._id}`)
+    res.redirect(`/listing/${listing._id}/allReviews`)
 }
 module.exports.destroyReview=async(req,res)=>{
     let {id,reviewId}=req.params;
     await Listing.findByIdAndUpdate(id,{$pull:{review,reviewId}})
     await Review.findByIdAndDelete(reviewId);
-    res.redirect(`/listing/${id}`);
+    res.redirect(`/listing/${id}/allReviews`);
 }
