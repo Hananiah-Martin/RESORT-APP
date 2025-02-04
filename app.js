@@ -27,6 +27,7 @@ const passport=require("passport");
 const localStrategy=require("passport-local");
 const User=require("./models/User.js");
 const Listing=require("./models/listing.js");
+const Razorpay = require('razorpay');
 const store=MongoStore.create({
     mongoUrl:"mongodb+srv://hananiahhoney5:55VikeotfqDYmKT2@cluster0.5h25d9m.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0",
     crypto:{
@@ -56,6 +57,8 @@ app.use(passport.session());
 passport.use(new localStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
+app.use(express.json());
+const map_api=process.env.MAP_API;
 
 main().then(()=>{
     console.log("connected to database successfully");
@@ -71,7 +74,36 @@ app.use((req,res,next)=>{
     res.locals.currUser=req.user;
     next();
 })
-
+const razorpay = new Razorpay({
+    key_id: process.env.RAZORPAY_KEY,
+    key_secret: process.env.RAZORPAY_SECRET,
+  });
+app.post('/create-order', async (req, res) => {
+    try {
+      const options = {
+        amount: req.body.amount * 100, // amount in smallest currency unit (paise)
+        currency: 'INR',
+        receipt: 'order_' + Date.now(),
+        payment_capture: 1 // auto capture payment
+      };
+      const order = await razorpay.orders.create(options);
+      res.json(order);
+    } catch (error) {
+      res.status(500).send(error);
+    }
+  });
+  app.post('/verify-payment', (req, res) => {
+    const { razorpay_order_id, razorpay_payment_id, razorpay_signature } = req.body;
+    const generated_signature = crypto
+      .createHmac('sha256', 'YOUR_RAZORPAY_KEY_SECRET')
+      .update(razorpay_order_id + '|' + razorpay_payment_id)
+      .digest('hex');
+    if (generated_signature === razorpay_signature) {
+      res.json({ status: 'success', message: 'Payment verified successfully' });
+    } else {
+      res.status(400).json({ status: 'failure', message: 'Payment verification failed' });
+    }
+  });
 app.post("/landmark",async (req,res)=>{
     let {search}=req.body;
     let allListings=await Listing.find({landmark:search});
@@ -79,6 +111,9 @@ app.post("/landmark",async (req,res)=>{
     if(allListings!=null){
         res.render("landmark.ejs",{allListings});
     }
+})
+app.get("/maps/:name",(req,res)=>{
+    res.render("maps.ejs",{map_api});
 })
 app.get("/listing/:id/allReviews",async (req,res)=>{
     let {id}=req.params;

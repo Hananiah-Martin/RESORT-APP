@@ -1,5 +1,6 @@
 const Listing=require("../models/listing");
 const review = require("../models/review");
+const razorpay_key=process.env.RAZORPAY_KEY;
 module.exports.index=async (req,res)=>{
     const allListings=await Listing.find({});
     res.render("index.ejs",{allListings});
@@ -21,7 +22,7 @@ module.exports.showListing=async (req,res)=>{
         sum=sum+num;
     }
     let average=Math.floor(sum/listing.reviews.length);
-    res.render("show.ejs",{listing,average});
+    res.render("show.ejs",{listing,average,razorpay_key});
 }
 module.exports.createListing=async (req,res)=>{
     let url=req.file.path;

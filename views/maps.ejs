@@ -1,0 +1,59 @@
+<% layout("/layouts/boilerplate2")%>
+<body>
+<div id="map"></div>
+<script>
+    const apiKey = "<%= map_api %>";
+    const platform = new H.service.Platform({ apikey: apiKey });
+    const defaultLayers = platform.createDefaultLayers();
+
+    const map = new H.Map(
+        document.getElementById('map'),
+        defaultLayers.vector.normal.map,
+        {
+            center: { lat: 51.4816, lng: -3.1791 }, // Default: Cardiff, UK
+            zoom: 8
+        }
+    );
+
+    // Enable UI controls and map interaction
+    const ui = H.ui.UI.createDefault(map, defaultLayers);
+    const behavior = new H.mapevents.Behavior(new H.mapevents.MapEvents(map));
+
+    // Add a marker
+    let marker = new H.map.Marker({ lat: 51.4816, lng: -3.1791 });
+    map.addObject(marker);
+
+    // Function to extract city from the URL
+    function getCityFromURL() {
+        const urlParts = window.location.pathname.split('/'); // e.g., /map/losangeles
+        return urlParts.length > 2 ? decodeURIComponent(urlParts[2]) : null;
+    }
+
+    // Fetch and update map based on city name
+    async function updateMapWithCity(city) {
+        if (!city) return;
+
+        let response = await fetch(`https://geocode.search.hereapi.com/v1/geocode?q=${city}&apiKey=${apiKey}`);
+        let data = await response.json();
+
+        if (data.items.length > 0) {
+            let location = data.items[0].position;
+
+            // Move map to the city location
+            map.setCenter({ lat: location.lat, lng: location.lng });
+            marker.setGeometry({ lat: location.lat, lng: location.lng });
+            marker.setData(`Location: ${city}`);
+        } else {
+            alert("Location not found!");
+        }
+    }
+
+    // Get city from URL and update the map
+    const cityFromURL = getCityFromURL();
+    if (cityFromURL) {
+        updateMapWithCity(cityFromURL);
+    }
+</script>
+
+</body>
+</html>

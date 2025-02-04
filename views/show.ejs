@@ -1,37 +1,164 @@
 <% layout("/layouts/boilerplate2")%>
 <body>
-    <div style="margin: auto;margin-top:5rem;">
-      <img class="object-cover w-full rounded-t-lg h-30 md:h-auto md:w-52 md:rounded-none md:rounded-s-lg" src="<%=listing.image.url%>" alt="" style="height: 30rem; width:25rem">
-      <div class="flex flex-col  p-4 leading-normal">
-          <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white"><%=listing.title %></h5>
-          <p class="mb-3 font-normal text-gray-700 dark:text-gray-400"><%=listing.description %></p>
-          <p class="mb-3 font-normal text-gray-700 dark:text-gray-400"><b>Price : </b><i class="fa-solid fa-indian-rupee-sign"></i><%=listing.price.toLocaleString("en-in")%></p>
-          <p class="mb-3 font-normal text-gray-700 dark:text-gray-400"><b>Location : </b><%=listing.location %></p>
-          <p class="mb-3 font-normal text-gray-700 dark:text-gray-400"><b>Country : </b> <%=listing.country %></p>
-          <p class="mb-3 font-normal text-gray-700 dark:text-gray-400"><b>Rating : </b>
-            <%if(average>0){%>
-              <% for (let i = 0; i <average; i++) { %>
-                <i class="fa-solid fa-star" style="color: #FFD43B;"></i>
-              <% } %>
-            <%}%></p>
-            <%if(listing.reviews.length==0){%>
-              <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">No reviews yet</p>
-            <%}%>
-            <div style="display: flex;">
-              <%if(currUser&&listing.owner._id.equals(currUser._id)){%>
-                <a href="/listing/<%=listing.id%>/edit" class="text-gray-900 bg-gradient-to-r from-red-200 via-red-300 to-yellow-200 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-red-100 dark:focus:ring-red-400 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2" style="width: 5rem;">Edit</a>
-                <form action="/listing/<%=listing.id%>?_method=delete" method="post">
-                  <button class="text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"" style="width: 5rem;">Delete</button>
-                </form>
-            <%}%>
-            </div>
-            <%if(currUser){%>
-              <form action="/listing/<%=listing.id%>/rating" method="get">
-                <button class="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 shadow-lg shadow-blue-500/50 dark:shadow-lg dark:shadow-blue-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 ">Rate Us</button>
-              </form>
-            <%}%>
+  <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+  <div class="max-w-4xl mx-auto bg-white rounded-lg shadow-xl overflow-hidden hover:shadow-2xl transition-shadow duration-300" style="margin-top: 7rem;">
+    <!-- Image Section -->
+    <div class="flex flex-col md:flex-row">
+      <img
+        class="w-full h-50 md:h-auto md:w-80 object-cover rounded-t-lg md:rounded-none md:rounded-l-lg transform hover:scale-105 transition-transform duration-300"
+        src="<%=listing.image.url%>"
+        alt="<%=listing.title%>"
+      />
+      <!-- Content Section -->
+      <div class="flex flex-col p-6 space-y-4">
+        <!-- Title -->
+        <h2 class="text-3xl font-bold text-gray-900 hover:text-blue-600 transition-colors duration-300">
+          <%=listing.title%>
+        </h2>
+        <!-- Description -->
+        <p class="text-gray-700 text-lg">
+          <%=listing.description%>
+        </p>
+        <!-- Price -->
+        <p class="text-gray-700 text-lg">
+          <span class="font-semibold">Price:</span>
+          <i class="fa-solid fa-indian-rupee-sign"></i>
+          <span class="text-green-600 font-bold"><%=listing.price.toLocaleString("en-in")%></span>
+        </p>
+        <!-- Location -->
+        <p class="text-gray-700 text-lg">
+          <span class="font-semibold">Location:</span>
+          <a href="/maps/<%=listing.location%>"><span class="text-blue-600"><%=listing.location%></span></a>
+        </p>
+        <!-- Country -->
+        <p class="text-gray-700 text-lg">
+          <span class="font-semibold">Country:</span>
+          <span class="text-purple-600"><%=listing.country%></span>
+        </p>
+        <!-- Rating -->
+        <p class="text-gray-700 text-lg">
+          <span class="font-semibold">Rating:</span>
+          <% if (average > 0) { %>
+            <% for (let i = 0; i < average; i++) { %>
+              <i class="fa-solid fa-star text-yellow-400 hover:text-yellow-500 transition-colors duration-300"></i>
+            <% } %>
+          <% } else { %>
+            <span class="text-gray-500">No reviews yet</span>
+          <% } %>
+        </p>
+        <!-- Actions -->
+        <div class="flex space-x-4">
+          <% if (currUser && listing.owner._id.equals(currUser._id)) { %>
+            <!-- Edit Button -->
+            <a
+              href="/listing/<%=listing.id%>/edit"
+              class="px-6 py-2 bg-gradient-to-r from-blue-500 to-blue-600 text-white font-semibold rounded-lg hover:from-blue-600 hover:to-blue-700 transition-all duration-300 shadow-lg hover:shadow-xl"
+            >
+              Edit
+            </a>
+            <!-- Delete Button -->
+            <form action="/listing/<%=listing.id%>?_method=delete" method="post">
+              <button
+                type="submit"
+                class="px-6 py-2 bg-gradient-to-r from-red-500 to-red-600 text-white font-semibold rounded-lg hover:from-red-600 hover:to-red-700 transition-all duration-300 shadow-lg hover:shadow-xl" style="background-color: black;"
+              >
+                Delete
+              </button>
+            </form>
+          <% } %>
+        </div>
+        <!-- Rate Us Button -->
+        <% if (currUser) { %>
+          <form action="/listing/<%=listing.id%>/rating" method="get">
+            <button
+              class="px-6 py-2 bg-gradient-to-r from-green-500 to-green-600 text-white font-semibold rounded-lg hover:from-green-600 hover:to-green-700 transition-all duration-300 shadow-lg hover:shadow-xl" style="background-color: cadetblue; width:15rem;"
+            >
+              Rate Us
+            </button>
+          </form>
+        <% } %>
+        <% if (currUser) { %>
+            <button
+              class="px-6 py-2 bg-gradient-to-r from-green-500 to-green-600 text-white font-semibold rounded-lg hover:from-green-600 hover:to-green-700 transition-all duration-300 shadow-lg hover:shadow-xl" style="background-color: cadetblue;" onclick="initiatePayment()"
+            >
+              Book Now
+            </button>
+        <% } %>
       </div>
     </div>
+  </div>
+  <script>
+    async function initiatePayment() {
+      console.log("payment inititated");
+      const amount = "<%=listing.price%>";
+      try {
+        // Create order
+        const response = await fetch("/create-order", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ amount: amount }),
+        });
+
+        const order = await response.json();
+
+        // Razorpay options
+        const options = {
+          key: "<%= razorpay_key %>",
+          amount: order.amount,
+          currency: order.currency,
+          name: "WanderLust",
+          description: "<%=listing.price%>",
+          image: "https://example.com/your_logo",
+          order_id: order.id,
+          handler: async function (response) {
+            // Verify payment on the server
+            const verifyResponse = await fetch("/verify-payment", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                razorpay_order_id: response.razorpay_order_id,
+                razorpay_payment_id: response.razorpay_payment_id,
+                razorpay_signature: response.razorpay_signature,
+              }),
+            });
+
+            const verificationResult = await verifyResponse.json();
+
+            if (verificationResult.status === "success") {
+              alert("Payment Successful!");
+            } else {
+              alert("Payment Failed");
+            }
+          },
+          prefill: {
+            name: "Customer Name",
+            email: "customer@example.com",
+            contact: "9865789846",
+          },
+          notes: {
+            address: "Razorpay Corporate Office",
+          },
+          theme: {
+            color: "#3399cc",
+          },
+        };
+
+        // Open Razorpay checkout
+        const rzp1 = new Razorpay(options);
+        rzp1.open();
+      } catch (error) {
+        console.error("Error initiating payment:", error);
+        alert("Payment initiation failed");
+      }
+    }function initiate(e){
+      e.preventDefault();
+      console.log("payment inititated");
+    }
+</script>
 </body>
-</html>
+<html/>
 

@@ -1,19 +1,15 @@
 <% layout("/layouts/boilerplate2")%>
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">  
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-6" style="margin-bottom: 10rem;">  
         <%for(review of listing.reviews){%>
-        <a href="#" class="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700" style="height: 15rem; margin-top: 5rem;">
+        <a href="#" class="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700" style=" margin-top: 5rem;">
             <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white"><%=review.author.username.slice(0,1).toUpperCase()+review.author.username.substring(1)%></h5>
             <p class="font-normal text-gray-700 dark:text-gray-400"><%=review.comment.charAt(0).toUpperCase()+review.comment.substring(1)%></p>
-            <p class="font-normal text-gray-700 dark:text-gray-400"><b>Rating :</b>
+            <p class="font-normal text-gray-700 dark:text-gray-400 mt-5"><b>Rating :</b>
                 <% for (let i = 0; i <review.rating; i++) { %>
                   <i class="fa-solid fa-star" style="color: #FFD43B;"></i>
                 <% } %></p>
-                <form method="POST" action="/listing/<%=listing.id%>/reviews/<%=review.id%>?_method=delete">
-                    <button class="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 shadow-lg shadow-blue-500/50 dark:shadow-lg dark:shadow-blue-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 " style="margin-top: 3rem;">Delete</button>
-                </form>
         </a>
         <%}%>
-        
     </div>
 
 </div> 

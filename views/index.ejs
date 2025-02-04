@@ -1,9 +1,9 @@
 <% layout("/layouts/boilerplate2")%>
 <body>
-    <div class="grid grid-cols-1 md:grid-cols-4 gap-5 my-1 py-1" style="margin-top: 5rem;">
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-2 my-1 py-1">
         <%for(listings of allListings){%>
-            <div>
-              <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+            <div style="margin-top: 5rem;">
+              <div class="max-w-sm bg-white border mx-3 border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
                 <a href="/listing/<%=listings.id%>">
                     <img class="max-w-full rounded-lg" style="height: 20rem; width:40rem;" src="<%=listings.image.url%>" alt="" />
                 </a>

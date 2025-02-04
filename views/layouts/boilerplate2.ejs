@@ -4,14 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WanderLust</title>
-    <link rel="stylesheet" href="/style.css">
     <link rel="stylesheet" href="/rating.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css"  rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://js.api.here.com/v3/3.1/mapsjs-core.js"></script>
+    <script src="https://js.api.here.com/v3/3.1/mapsjs-service.js"></script>
+    <script src="https://js.api.here.com/v3/3.1/mapsjs-ui.js"></script>
+    <script src="https://js.api.here.com/v3/3.1/mapsjs-mapevents.js"></script>
+    <link rel="stylesheet" href="https://js.api.here.com/v3/3.1/mapsjs-ui.css" />
+    <style>
+        body { font-family: Arial, sans-serif;}
+        #map { height: 500px; width: 100%; margin-top: 10px; }
+        #searchBox { width: 300px; padding: 8px; }
+        #searchBtn { padding: 8px; cursor: pointer; }
+    </style>
 </head>
 <body>
     <%-include("../includes/navbar.ejs")%>
-    <div class="container">
+    <div>
         <%-body%>
     </div>
     <%-include("../includes/footer.ejs")%>
